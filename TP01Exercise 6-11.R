@@ -159,7 +159,7 @@ set.seed(100)
 folds <- sample(rep(1:k, length=n))
 matrix1 <- matrix(NA, k, 11, dimnames=list(NULL, paste(1:11)))
 # Nested For Loop 
-for ( in i:k){
+for (j in i:k){
   best.fit <- regsubsets(medv~.-indus-age, data=Boston[folds != j, ], nvmax=11) 
   for (i in 1:11){
     pred <- predict.regsubsets(best.fit, Boston[folds == j, ], id=i) 
@@ -169,10 +169,10 @@ for ( in i:k){
 matrix1
 
 # average the columns of the matrix to obtain a vector 
-mean.cv.errors <- apply(cv.errors, 2, mean)
-mean.cv.errors
+mean.matrix1 <- apply(matrix1, 2, mean)
+mean.matrix1
 # result aligns with the Validation Set results, as the lowest error is in the 11th model at 23.44
-plot(mean.cv.errors, type="b", col="blue")
+plot(mean.matrix1, type="b", col="blue")
 
 #c) Does the chosen model include all features in the dataset?
   # Best Subsets does not, we eliminated indus and age earlier. The Adjusted R-squared, RSS, Cp, and BIC all indicated that
