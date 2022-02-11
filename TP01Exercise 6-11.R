@@ -159,7 +159,7 @@ set.seed(100)
 folds <- sample(rep(1:k, length=n))
 matrix1 <- matrix(NA, k, 11, dimnames=list(NULL, paste(1:11)))
 # Nested For Loop 
-for (j in i:k){
+for ( in i:k){
   best.fit <- regsubsets(medv~.-indus-age, data=Boston[folds != j, ], nvmax=11) 
   for (i in 1:11){
     pred <- predict.regsubsets(best.fit, Boston[folds == j, ], id=i) 
